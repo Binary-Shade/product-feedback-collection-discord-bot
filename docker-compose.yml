@@ -1,0 +1,24 @@
+services:
+  api:
+    build: .
+    command: python run_api.py
+    env_file: .env
+    ports:
+      - "8000:8000"
+    volumes:
+      - data:/srv/data
+      - ./feedback.db:/srv/feedback.db
+    restart: unless-stopped
+
+  bot:
+    build: .
+    command: python run_bot.py
+    env_file: .env
+    volumes:
+      - ./feedback.db:/srv/feedback.db
+    restart: unless-stopped
+    depends_on:
+      - api
+
+volumes:
+  data:
