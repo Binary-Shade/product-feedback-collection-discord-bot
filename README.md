@@ -150,4 +150,3 @@ feedback-bot/
 - The in-memory rate limiter resets if the API process restarts and doesn't
   work across multiple API instances — fine for a single VPS, swap for Redis
   if you ever run more than one API replica.
-# product-feedback-collection-discord-bot
