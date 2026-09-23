@@ -5,8 +5,8 @@ services:
     env_file: .env
     environment:
       - API_PORT=8009
-    expose:
-      - "8009"
+    ports:
+      - "127.0.0.1:8009:8009"
     volumes:
       - data:/srv/data
       - ./feedback.db:/srv/feedback.db
@@ -22,19 +22,6 @@ services:
     depends_on:
       - api
 
-  caddy:
-    image: caddy:2-alpine
-    restart: unless-stopped
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile
-      - caddy_data:/data
-      - caddy_config:/config
-    depends_on:
-      - api
-
   duckdns:
     image: lscr.io/linuxserver/duckdns:latest
     restart: unless-stopped
@@ -46,5 +33,3 @@ services:
 
 volumes:
   data:
-  caddy_data:
-  caddy_config:

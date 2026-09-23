@@ -1,3 +1,0 @@
-binary-shade.duckdns.org {
-	reverse_proxy api:8009
-}
